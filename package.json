@@ -1,0 +1,55 @@
+{
+  "name": "electron-dll-demo",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "build": {
+    "appId": "com.electron.app",
+    "extraResources": [
+      "./assets"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "createDesktopShortcut": "always",
+      "allowToChangeInstallationDirectory": true
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://192.168.30.111:7430/upload/electron"
+      }
+    ]
+  },
+  "scripts": {
+    "start": "electron . --debug",
+    "el": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "author": "biake",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^9.1.2",
+    "electron-builder": "^22.7.0",
+    "electron-rebuild": "^2.2.0"
+  },
+  "dependencies": {
+    "electron-log": "^4.2.2",
+    "electron-updater": "^4.3.1",
+    "macaddress": "^0.2.9",
+    "ffi-napi": "^3.0.1",
+    "iconv-lite": "^0.6.2",
+    "ref-napi": "^3.0.1",
+    "ref-array-napi": "^1.2.1"
+  }
+}
