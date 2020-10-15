@@ -137,8 +137,9 @@ ipcMain.handle('get-idcard' , function(event,data){
     CVR.CloseComm()
     return "readContent:"+readContent;
   }
-  var as_data =CVR.GetPeopleName();
-  
-  return as_data;
+  var name =CVR.GetPeopleName().trim();
+  var card = CVR.GetPeopleIDCode().trim();
+  CVR.CloseComm()
+  return {name,card};
 })
 

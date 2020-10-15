@@ -17,7 +17,8 @@ var lib = ffi.Library(dllPath, {
     'CVR_CloseComm': ['int',[]],
     'CVR_Authenticate': ['int',[]],
     'CVR_Read_FPContent': ['int', []],
-    'GetPeopleName':['int' ,[ref.refType('char') , ref.refType('int')]]
+    'GetPeopleName':['int' ,[ref.refType('char') , ref.refType('int')]],
+    'GetPeopleIDCode':['int' ,[ref.refType('char') , ref.refType('int')]],
   })
 
 var service ={
@@ -35,10 +36,19 @@ var service ={
     },
     GetPeopleName:()=>{
         var handleRef = ref.alloc('int');
-        var lt = new Buffer(128).fill(" ");
+        // nodejs 8版本 写法
+        // var lt = new Buffer(128).fill(" ");
+        // nodejs 10+版本 写法
+        var lt = Buffer.alloc(128," ");
         lib.GetPeopleName(lt , handleRef);
         return iconv.decode(lt, 'GBK');
-    }
+    },
+    GetPeopleIDCode:()=>{
+        var handleRef = ref.alloc('int');        
+        var lt = Buffer.alloc(128," ");
+        lib.GetPeopleIDCode(lt , handleRef);
+        return iconv.decode(lt, 'GBK');
+    },
 }  
 
 module.exports = service;
